@@ -34,9 +34,17 @@
     <div class="main">
         <div class="h1">
 
+
             <h1><strong>"AT ST. HECTOR'S, WE CARE."</strong></h1>
             <br>
         </div>
+
+ 
+        
+
+           
+        </div>
+
 
         <div>
             @if (Session::has('success_message'))
@@ -46,6 +54,7 @@
         </div>
      
     @endif
+
 
     </div>
     <footer>

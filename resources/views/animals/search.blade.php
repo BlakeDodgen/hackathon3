@@ -25,6 +25,9 @@
         <form action="/home/search" method="get">
             <input name="search" type="text">
             <input type="submit" value="Search">
+            <a href="/create">
+                <input type="button" value="New Record" />
+            </a>
         </form>
 
     </nav>
