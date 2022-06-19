@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateFormRequest;
 use App\Models\Animal;
 use App\Models\Owner;
 use App\Models\Image;
@@ -20,7 +21,7 @@ class FormController extends Controller
     return view('index.create', compact('record'));
 }
 
-public function store(Request $request)
+public function store(CreateFormRequest $request)
     {
         // prepare empty object
         $record = new Animal;

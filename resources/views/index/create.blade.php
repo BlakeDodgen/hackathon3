@@ -49,7 +49,8 @@
             <input type="submit" value="Create Record">
         </form>
     </div>
-
+    {{-- error messages after validation  --}}
+    @include('common/errors');
     <footer>
         <p>© St. Hector's Veterinary Clinic 2022</p>
     </footer>
