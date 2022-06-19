@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>St. Hector's Veterinary Clinic - Home</title>
+    <title>St. Hector's Veterinary Clinic - Search</title>
 
     <link rel="stylesheet" href="/css/app.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
@@ -25,33 +25,36 @@
         <form action="/home/search" method="get">
             <input name="search" type="text">
             <input type="submit" value="Search">
-            <a href="/create">
-                <input type="button"  value="New Record" />
-                </a>
         </form>
 
     </nav>
+
     <div class="main">
-        <div class="h1">
 
-            <h1><strong>"AT ST. HECTOR'S, WE CARE."</strong></h1>
-            <br>
-        </div>
+        <h1>Results</h1>
+        <h3>Search results for: &nbsp; {{$name}}</h3>
 
-        <div>
-            @if (Session::has('success_message'))
-     
-        <div class="alert alert-success">
-            {{ Session::get('success_message') }}
-        </div>
-     
-    @endif
+    
+        <ul>
+            @foreach ($result_next as $animal)
+            <li>
+                <a href="{{route('animal.detail', $animal->id)}}">
+                    Pet name: {{ $animal->name }} |
+                    Age: {{ $animal->age }} |
+                    Weight: {{ $animal->weight }}
+                </a>
+            </li>
+            @endforeach
+        </ul>
+
+        <a href="/search.blade_next.php">Page:&nbsp;{{$next_page}} &nbsp; next page -></a>
+        <a href="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<-&nbsp;previous page</a>
 
     </div>
+
     <footer>
         <p>© St. Hector's Veterinary Clinic 2022</p>
     </footer>
-
 
 </body>
 

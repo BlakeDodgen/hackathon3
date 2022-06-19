@@ -32,6 +32,8 @@
     <div class="main">
 
         <h1>Results</h1>
+        <h3>Search results for: &nbsp; {{$name}}  &nbsp; | &nbsp; Number of results: &nbsp; {{$number_of_records}}</h3>
+        
 
         <ul>
             @foreach ($result as $animal)
@@ -44,6 +46,10 @@
             </li>
             @endforeach
         </ul>
+        <br>
+        <a href="{{route('animal.search_next', $name)}}">Page:&nbsp;{{$page}} &nbsp; next page -></a>
+        
+
     </div>
 
     <footer>

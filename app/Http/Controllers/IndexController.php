@@ -24,23 +24,68 @@ class IndexController extends Controller
     {    
         if (isset($_GET['search'])) {
 
+            $page = 1;
             $name = $_GET['search'];
             $result = Animal::where('name', 'like', '%'.$name.'%')
                         ->orWhere('species', 'like', '%'.$name.'%')
                         ->orWhere('breed', 'like', '%'.$name.'%')
-                        ->limit(20) 
+                        ->orderBy('name')
+                          
+                        ->take(20) 
                         ->get();
-            
+
+            $ressult_next = Animal::where('name', 'like', '%'.$name.'%')
+                        ->orWhere('species', 'like', '%'.$name.'%')
+                        ->orWhere('breed', 'like', '%'.$name.'%')
+                        ->orderBy('name')
+                        ->skip(20)  
+                        ->take(20) 
+                        ->get();
             
              } else {
                
             $name = "";
             $result = []; //change to empty Collection 
              };
+
+            if (count($result)===0) {
+                $name = " No records finded";
+            } 
+            $number_of_records = count($result);
             //  dd($result);    
         return view('animals.search', [
             'name' => $name,
-            'result' => $result
+            'result' => $result,
+            'number_of_records'=> $number_of_records,
+            'page' => $page   
         ]);
+    }
+
+    public function search_next($search)
+    {
+            $page = 1;
+            $next_page = $page * 2;
+            $name = $search;
+            $result_next = Animal::where('name', 'like', '%'.$name.'%')
+                        ->orWhere('species', 'like', '%'.$name.'%')
+                        ->orWhere('breed', 'like', '%'.$name.'%')
+                        ->orderBy('name')
+                        ->skip($next_page)  
+                        ->take(20) 
+                        ->get();
+            
+             
+               
+            $name = "";
+            $result = []; //change to empty Collection 
+
+            
+
+            return view('animals.search_next', [
+                'name' => $name,
+                'result' => $result,
+                 'result_next' => $result_next,
+                 'next_page' => $next_page    
+            ]);
     }
 }
